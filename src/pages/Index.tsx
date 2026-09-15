@@ -4,6 +4,7 @@ import HowItWorks from '@/components/HowItWorks';
 import Faq from '@/components/Faq';
 import Footer from '@/components/Footer';
 import SeoSchema from '@/components/SeoSchema';
+import SeoText from '@/components/SeoText';
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
         <Catalog />
         <HowItWorks />
         <Faq />
+        <SeoText />
       </main>
       <Footer />
     </div>
