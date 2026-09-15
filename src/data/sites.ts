@@ -60,7 +60,7 @@ export const sites: Site[] = [
     promo: '',
     rating: 4.88,
     reviews: 1284,
-    categories: ['cases', 'upgrade', 'battles'],
+    categories: ['free', 'cases', 'upgrade', 'battles'],
     url: 'https://app.skinoz.net/?ref=YHNzRVVkagdZXgRZcw==',
     checked: 'сегодня',
     perks: ['250 бесплатных монет каждые сутки', 'Вывод скинов за 2 минуты', 'Кейсы от 3 ₽'],
