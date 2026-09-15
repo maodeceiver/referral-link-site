@@ -15,7 +15,7 @@ const buildSchema = () => {
       item: {
         '@type': 'Product',
         name: site.name,
-        url: `${SITE_URL}/#catalog`,
+        url: `${SITE_URL}/site/${site.id}`,
         image: `${SITE_URL}${site.logo}`,
         description: `${site.kind}: ${site.bonusHighlight} ${site.bonusRest}.`,
         brand: { '@type': 'Brand', name: site.name },
@@ -31,7 +31,7 @@ const buildSchema = () => {
           price: '0',
           priceCurrency: 'RUB',
           availability: 'https://schema.org/InStock',
-          url: `${SITE_URL}/#catalog`,
+          url: `${SITE_URL}/site/${site.id}`,
         },
       },
     })),

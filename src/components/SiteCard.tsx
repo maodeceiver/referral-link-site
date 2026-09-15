@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import type { Site } from '@/data/sites';
 
@@ -103,12 +104,19 @@ const SiteCard = ({ site, index, copied, onCopy, onReview }: SiteCardProps) => {
           >
             Забрать бонус
           </a>
-          <button
-            type="button"
-            onClick={() => onReview(site)}
+          <Link
+            to={`/site/${site.id}`}
             className="ghost-gradient flex h-[46px] items-center rounded-xl border border-border px-5 text-[0.82rem] font-bold uppercase tracking-[0.08em] text-muted-foreground transition-colors hover:text-foreground"
           >
             Обзор
+          </Link>
+          <button
+            type="button"
+            onClick={() => onReview(site)}
+            aria-label={`Быстрый просмотр ${site.name}`}
+            className="ghost-gradient grid h-[46px] w-[46px] place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Icon name="Eye" size={18} />
           </button>
           <span className="ml-auto hidden items-center gap-1 text-[0.75rem] text-muted-foreground sm:flex">
             <Icon name="ShieldCheck" size={14} className="text-primary" />

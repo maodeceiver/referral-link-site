@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import {
   Dialog,
@@ -207,6 +208,12 @@ const Catalog = () => {
                       Копировать код
                     </button>
                   )}
+                  <Link
+                    to={`/site/${review.id}`}
+                    className="ghost-gradient flex h-12 items-center rounded-xl border border-border px-5 text-[0.8rem] font-bold uppercase tracking-[0.08em] text-foreground"
+                  >
+                    Подробный обзор
+                  </Link>
                   <a
                     href={review.url}
                     target="_blank"
