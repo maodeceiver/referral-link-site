@@ -7,12 +7,17 @@ import Faq from '@/components/Faq';
 import Footer from '@/components/Footer';
 import SeoSchema from '@/components/SeoSchema';
 import SeoText from '@/components/SeoText';
-import { categories, sites } from '@/data/sites';
+import CategoryIntro from '@/components/CategoryIntro';
+import { categoryContent } from '@/data/categoryContent';
+import { categories, sites, type CategoryId } from '@/data/sites';
 
 const SITE_URL = 'https://codecasecs.ru';
 
 const Index = () => {
   const { categoryId } = useParams();
+  const activeCategory = categories.some((c) => c.id === categoryId)
+    ? (categoryId as CategoryId)
+    : null;
 
   useEffect(() => {
     const cat = categories.find((c) => c.id === categoryId);
@@ -24,7 +29,7 @@ const Index = () => {
       ? `${cat.label} CS2 — промокоды и бонусы ${new Date().getFullYear()} | CodeCase`
       : 'CodeCase — промокоды и бонусы сайтов с кейсами CS2';
     const description = cat
-      ? `${cat.label} в CS2: ${count} проверенных сайтов с рабочими промокодами и бонусами. Коды обновляются каждый день.`
+      ? `${categoryContent[cat.id].lead} ${count} проверенных сайтов с рабочими промокодами — коды обновляются каждый день.`
       : 'Каталог проверенных промокодов и бонусов сайтов по открытию кейсов CS2. Бесплатные кейсы, бонусы на депозит, апгрейдеры и рулетки — коды обновляются каждый день.';
 
     document.title = title;
@@ -42,9 +47,10 @@ const Index = () => {
       <Header />
       <main className="pt-2">
         <Catalog />
+        {activeCategory && <CategoryIntro categoryId={activeCategory} />}
         <HowItWorks />
         <Faq />
-        <SeoText />
+        {!activeCategory && <SeoText />}
       </main>
       <Footer />
     </div>
