@@ -33,6 +33,7 @@ export interface Site {
   namePrefix: string;
   nameSuffix: string;
   tone: AccentTone;
+  logo: string;
   tagline: string;
   kind: string;
   bonusHighlight: string;
@@ -56,6 +57,7 @@ export const sites: Site[] = [
     namePrefix: 'Skin',
     nameSuffix: 'oz',
     tone: 'accent',
+    logo: '/logos/skinoz.webp',
     tagline: 'CS2 CASES',
     kind: 'Бонус за переход по ссылке',
     bonusHighlight: '250 монет',
@@ -77,6 +79,7 @@ export const sites: Site[] = [
     namePrefix: 'NT',
     nameSuffix: 'Skins',
     tone: 'sky',
+    logo: '/logos/ntskins.webp',
     tagline: 'SKIN TRADE',
     kind: 'Бесплатный скин',
     bonusHighlight: 'Скин',
@@ -97,6 +100,7 @@ export const sites: Site[] = [
     namePrefix: 'Easy',
     nameSuffix: 'Drop',
     tone: 'accent',
+    logo: '/logos/easydrop.webp',
     tagline: 'OPEN & WIN',
     kind: 'Бонус по промокоду',
     bonusHighlight: 'Кейс',
@@ -117,6 +121,7 @@ export const sites: Site[] = [
     namePrefix: 'Force',
     nameSuffix: 'Drop',
     tone: 'gold',
+    logo: '/logos/forcedrop.webp',
     tagline: 'CASES & UPGRADE',
     kind: 'Бонус по промокоду',
     bonusHighlight: 'Бонус',
@@ -137,6 +142,7 @@ export const sites: Site[] = [
     namePrefix: 'Top',
     nameSuffix: 'Skins',
     tone: 'sky',
+    logo: '/logos/topskins.webp',
     tagline: 'TOP CASES',
     kind: 'Бонус к депозиту',
     bonusHighlight: '+20%',
@@ -157,6 +163,7 @@ export const sites: Site[] = [
     namePrefix: 'CS',
     nameSuffix: 'Fail',
     tone: 'accent',
+    logo: '/logos/csfail.webp',
     tagline: 'CASE BATTLES',
     kind: 'Бонус за переход по ссылке',
     bonusHighlight: 'Бесплатный кейс',
@@ -177,6 +184,7 @@ export const sites: Site[] = [
     namePrefix: 'My',
     nameSuffix: 'CS2',
     tone: 'gold',
+    logo: '/logos/mycs2.webp',
     tagline: 'CASES & ROULETTE',
     kind: 'Бонус к депозиту',
     bonusHighlight: '+20%',

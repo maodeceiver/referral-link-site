@@ -32,12 +32,20 @@ const SiteCard = ({ site, index, copied, onCopy, onReview }: SiteCardProps) => {
       />
 
       <div className="logo-hatch relative grid h-[120px] w-full shrink-0 place-items-center overflow-hidden rounded-2xl bg-well sm:h-auto sm:w-[200px]">
-        <div className="relative z-10 text-center">
-          <span className="text-[1.5rem] font-bold uppercase leading-none tracking-[-0.03em]">
+        <div className="relative z-10 flex flex-col items-center gap-2 px-3 text-center">
+          <img
+            src={site.logo}
+            alt={`Логотип ${site.name}`}
+            width={64}
+            height={64}
+            loading="lazy"
+            className="h-16 w-16 rounded-xl object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.45)]"
+          />
+          <span className="text-[0.95rem] font-bold uppercase leading-none tracking-[-0.02em]">
             {site.namePrefix}
             <span className={toneClass[site.tone]}>{site.nameSuffix}</span>
           </span>
-          <span className="mt-[6px] block text-[0.62rem] font-semibold tracking-[0.22em] text-muted-foreground">
+          <span className="block text-[0.58rem] font-semibold tracking-[0.2em] text-muted-foreground">
             {site.tagline}
           </span>
         </div>
