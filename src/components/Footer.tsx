@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import { categories } from '@/data/sites';
 
@@ -32,12 +33,12 @@ const Footer = () => {
             <ul className="mt-4 space-y-2">
               {categories.map((cat) => (
                 <li key={cat.id}>
-                  <a
-                    href="#catalog"
+                  <Link
+                    to={`/category/${cat.id}`}
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
                     {cat.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

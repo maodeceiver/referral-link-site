@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import {
   Dialog,
@@ -22,8 +22,14 @@ const sortLabels: Record<SortKey, string> = {
 };
 
 const Catalog = () => {
+  const { categoryId } = useParams();
+  const navigate = useNavigate();
+  const urlCategory = categories.some((c) => c.id === categoryId)
+    ? (categoryId as CategoryId)
+    : 'all';
+
   const [query, setQuery] = useState('');
-  const [active, setActive] = useState<CategoryId | 'all'>('all');
+  const [active, setActive] = useState<CategoryId | 'all'>(urlCategory);
   const [sort, setSort] = useState<SortKey>('rating');
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [review, setReview] = useState<Site | null>(null);
@@ -53,6 +59,15 @@ const Catalog = () => {
     });
   }, [query, active, sort]);
 
+  useEffect(() => {
+    setActive(urlCategory);
+  }, [urlCategory]);
+
+  const changeCategory = (id: CategoryId | 'all') => {
+    setActive(id);
+    navigate(id === 'all' ? '/' : `/category/${id}`);
+  };
+
   const handleCopy = async (site: Site) => {
     try {
       await navigator.clipboard.writeText(site.promo);
@@ -73,7 +88,7 @@ const Catalog = () => {
         query={query}
         onQueryChange={setQuery}
         active={active}
-        onCategoryChange={setActive}
+        onCategoryChange={changeCategory}
         total={sites.length}
       />
 
@@ -130,7 +145,7 @@ const Catalog = () => {
             type="button"
             onClick={() => {
               setQuery('');
-              setActive('all');
+              changeCategory('all');
             }}
             className="accent-gradient mt-2 flex h-11 items-center rounded-xl px-6 text-[0.8rem] font-bold uppercase tracking-[0.08em] text-primary-foreground"
           >
