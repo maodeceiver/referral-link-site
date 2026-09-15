@@ -52,6 +52,32 @@ export interface Site {
 
 export const sites: Site[] = [
   {
+    id: 'openstars',
+    name: 'OpenStars',
+    namePrefix: 'Open',
+    nameSuffix: 'Stars',
+    tone: 'gold',
+    logo: '/logos/openstars.webp',
+    tagline: 'CS2 CASES',
+    kind: 'Бонус за регистрацию',
+    bonusHighlight: '0.5$',
+    bonusRest: 'на баланс при регистрации',
+    promo: 'DXVRTDAS',
+    rating: 4.79,
+    reviews: 1043,
+    categories: ['free', 'cases', 'upgrade', 'contracts', 'battles'],
+    url: 'https://openstars.gg/?r=DXVRTDAS',
+    checked: 'сегодня',
+    perks: [
+      '0.5$ на баланс сразу после регистрации',
+      'Кейсы, апгрейдер и батлы на одной площадке',
+      'Вывод скинов напрямую в инвентарь Steam',
+    ],
+    minDeposit: 'не нужен',
+    payouts: 'Steam, карта, крипта',
+    featured: true,
+  },
+  {
     id: 'skinoz',
     name: 'Skinoz',
     namePrefix: 'Skin',
