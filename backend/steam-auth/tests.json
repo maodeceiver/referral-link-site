@@ -1,0 +1,18 @@
+{
+  "tests": [
+    {
+      "name": "Ссылка на вход в Steam",
+      "method": "GET",
+      "path": "/?action=login&return_to=https://example.com/&callback=https://example.com/",
+      "expectedStatus": 200,
+      "expectedBody": {"url": "string"},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Профиль без токена",
+      "method": "GET",
+      "path": "/?action=me",
+      "expectedStatus": 200
+    }
+  ]
+}

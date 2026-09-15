@@ -1,0 +1,23 @@
+{
+  "tests": [
+    {
+      "name": "Статистика отзывов",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Отзывы по сайту",
+      "method": "GET",
+      "path": "/?site_id=skinoz",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Отзыв без входа",
+      "method": "POST",
+      "path": "/",
+      "body": {"siteId": "skinoz", "rating": 5, "text": "тест"},
+      "expectedStatus": 401
+    }
+  ]
+}

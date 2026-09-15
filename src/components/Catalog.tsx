@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import SearchBand from '@/components/SearchBand';
 import SiteCard from '@/components/SiteCard';
+import SiteReviews from '@/components/SiteReviews';
 import { categories, sites, type CategoryId, type Site } from '@/data/sites';
 import { toast } from '@/hooks/use-toast';
 
@@ -139,7 +140,7 @@ const Catalog = () => {
       )}
 
       <Dialog open={!!review} onOpenChange={(o) => !o && setReview(null)}>
-        <DialogContent className="max-w-lg rounded-3xl border-border panel-gradient">
+        <DialogContent className="max-h-[88vh] max-w-lg overflow-y-auto rounded-3xl border-border panel-gradient">
           {review && (
             <>
               <DialogHeader>
@@ -216,6 +217,8 @@ const Catalog = () => {
                     Перейти на сайт
                   </a>
                 </div>
+
+                <SiteReviews siteId={review.id} siteName={review.name} />
               </div>
             </>
           )}
