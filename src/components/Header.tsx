@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Icon from '@/components/ui/icon';
-import SteamButton from '@/components/SteamButton';
 
 const navLinks = [
   { href: '#catalog', label: 'Каталог' },
@@ -58,7 +57,9 @@ const Header = () => {
               <span className="h-[7px] w-[7px] rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]" />
               Коды проверены сегодня
             </span>
-            <SteamButton />
+            <span className="flex h-[38px] items-center rounded-xl border border-border bg-card px-4 text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-foreground">
+              Ru
+            </span>
           </div>
 
           <button
@@ -84,9 +85,6 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <div className="px-2 pb-1 pt-2 md:hidden">
-                <SteamButton className="w-full justify-center" />
-              </div>
             </div>
           </nav>
         )}
