@@ -199,6 +199,27 @@ export const sites: Site[] = [
     minDeposit: 'от 100 ₽',
     payouts: 'Steam, СБП, крипта',
   },
+  {
+    id: 'dolphin',
+    name: 'Dolphin',
+    namePrefix: 'Dol',
+    nameSuffix: 'phin',
+    tone: 'sky',
+    logo: '/logos/dolphin.webp',
+    tagline: 'CS2 CASES',
+    kind: 'Бонус за переход по ссылке',
+    bonusHighlight: 'Бесплатный кейс',
+    bonusRest: 'при регистрации',
+    promo: '',
+    rating: 4.71,
+    reviews: 627,
+    categories: ['free', 'cases', 'upgrade'],
+    url: 'https://dolphin.win/invite/05e5527a26a2',
+    checked: 'сегодня',
+    perks: ['Бесплатный кейс при регистрации', 'Апгрейдер скинов', 'Быстрый вывод в Steam'],
+    minDeposit: 'не нужен',
+    payouts: 'Steam, крипта, карта',
+  },
 ];
 
 export const faq = [
