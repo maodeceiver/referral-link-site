@@ -16,6 +16,8 @@ import { baseUrl, openRef } from '@/lib/refLink';
 
 type SortKey = 'rating' | 'name' | 'fresh';
 
+const PAGE_SIZE = 10;
+
 const sortLabels: Record<SortKey, string> = {
   rating: 'По рейтингу',
   fresh: 'Сначала свежие',
@@ -34,6 +36,7 @@ const Catalog = () => {
   const [sort, setSort] = useState<SortKey>('rating');
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [review, setReview] = useState<Site | null>(null);
+  const [visible, setVisible] = useState(PAGE_SIZE);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -63,6 +66,13 @@ const Catalog = () => {
   useEffect(() => {
     setActive(urlCategory);
   }, [urlCategory]);
+
+  useEffect(() => {
+    setVisible(PAGE_SIZE);
+  }, [query, active, sort]);
+
+  const shown = filtered.slice(0, visible);
+  const rest = filtered.length - shown.length;
 
   const changeCategory = (id: CategoryId | 'all') => {
     setActive(id);
@@ -123,7 +133,7 @@ const Catalog = () => {
 
       {filtered.length > 0 ? (
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {filtered.map((site, i) => (
+          {shown.map((site, i) => (
             <SiteCard
               key={site.id}
               site={site}
@@ -152,6 +162,22 @@ const Catalog = () => {
           >
             Сбросить фильтры
           </button>
+        </div>
+      )}
+
+      {rest > 0 && (
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setVisible((v) => v + PAGE_SIZE)}
+            className="ghost-gradient flex h-12 items-center gap-2 rounded-xl border border-border px-7 text-[0.8rem] font-bold uppercase tracking-[0.08em] text-foreground transition-colors hover:border-primary/50"
+          >
+            <Icon name="ChevronDown" size={16} className="text-primary" />
+            Показать ещё {Math.min(rest, PAGE_SIZE)}
+          </button>
+          <p className="text-[0.78rem] text-muted-foreground">
+            Показано {shown.length} из {filtered.length}
+          </p>
         </div>
       )}
 
