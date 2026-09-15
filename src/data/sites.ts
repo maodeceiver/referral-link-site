@@ -153,9 +153,9 @@ export const sites: Site[] = [
   },
   {
     id: '12cs',
-    name: '12CS',
-    namePrefix: '12',
-    nameSuffix: 'CS',
+    name: 'CSFail',
+    namePrefix: 'CS',
+    nameSuffix: 'Fail',
     tone: 'accent',
     tagline: 'CASE BATTLES',
     kind: 'Бонус по нашей ссылке',
