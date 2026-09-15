@@ -4,9 +4,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { faq } from '@/data/sites';
+import { categoryContent } from '@/data/categoryContent';
+import { categories, faq, type CategoryId } from '@/data/sites';
 
-const Faq = () => {
+interface FaqProps {
+  categoryId?: CategoryId | null;
+}
+
+const Faq = ({ categoryId }: FaqProps) => {
+  const category = categoryId
+    ? categories.find((c) => c.id === categoryId)
+    : undefined;
+  const items = category ? categoryContent[category.id].faq : faq;
+
   return (
     <section id="faq" className="mx-auto w-full max-w-[1280px] px-4 pb-16 sm:px-5">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
@@ -15,16 +25,17 @@ const Faq = () => {
             FAQ
           </p>
           <h2 className="mt-2 text-[1.9rem] font-bold uppercase leading-[1.08] tracking-[-0.025em] sm:text-[2.2rem]">
-            Частые вопросы
+            {category ? `${category.label} — вопросы` : 'Частые вопросы'}
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Коротко о том, как работают промокоды на сайтах с кейсами CS2 и почему код
-            иногда не срабатывает.
+            {category
+              ? `Что чаще всего спрашивают про раздел «${category.label}»: как забрать бонус, вывести скин и на что смотреть перед пополнением.`
+              : 'Коротко о том, как работают промокоды на сайтах с кейсами CS2 и почему код иногда не срабатывает.'}
           </p>
         </div>
 
         <Accordion type="single" collapsible className="w-full">
-          {faq.map((item, i) => (
+          {items.map((item, i) => (
             <AccordionItem
               key={item.q}
               value={`item-${i}`}

@@ -1,15 +1,23 @@
 import { useEffect } from 'react';
-import { faq, sites } from '@/data/sites';
+import { categoryContent } from '@/data/categoryContent';
+import { categories, faq, sites, type CategoryId } from '@/data/sites';
 
 const SITE_URL = 'https://codecasecs.ru';
 
-const buildSchema = () => {
+const buildSchema = (categoryId?: CategoryId | null) => {
+  const category = categoryId ? categories.find((c) => c.id === categoryId) : undefined;
+  const list = category
+    ? sites.filter((s) => s.categories.includes(category.id))
+    : sites;
+  const faqItems = category ? categoryContent[category.id].faq : faq;
   const itemList = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Промокоды сайтов с кейсами CS2',
-    numberOfItems: sites.length,
-    itemListElement: sites.map((site, i) => ({
+    name: category
+      ? `${category.label} CS2 — промокоды и бонусы`
+      : 'Промокоды сайтов с кейсами CS2',
+    numberOfItems: list.length,
+    itemListElement: list.map((site, i) => ({
       '@type': 'ListItem',
       position: i + 1,
       item: {
@@ -40,7 +48,7 @@ const buildSchema = () => {
   const faqPage = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faq.map((item) => ({
+    mainEntity: faqItems.map((item) => ({
       '@type': 'Question',
       name: item.q,
       acceptedAnswer: { '@type': 'Answer', text: item.a },
@@ -60,9 +68,13 @@ const buildSchema = () => {
   return [itemList, faqPage, website];
 };
 
-const SeoSchema = () => {
+interface SeoSchemaProps {
+  categoryId?: CategoryId | null;
+}
+
+const SeoSchema = ({ categoryId }: SeoSchemaProps) => {
   useEffect(() => {
-    const nodes = buildSchema().map((schema) => {
+    const nodes = buildSchema(categoryId).map((schema) => {
       const el = document.createElement('script');
       el.type = 'application/ld+json';
       el.dataset.seoSchema = 'true';
@@ -71,7 +83,7 @@ const SeoSchema = () => {
       return el;
     });
     return () => nodes.forEach((el) => el.remove());
-  }, []);
+  }, [categoryId]);
 
   return null;
 };

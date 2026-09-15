@@ -43,13 +43,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-      <SeoSchema />
+      <SeoSchema categoryId={activeCategory} />
       <Header />
       <main className="pt-2">
         <Catalog />
         {activeCategory && <CategoryIntro categoryId={activeCategory} />}
         <HowItWorks />
-        <Faq />
+        <Faq categoryId={activeCategory} />
         {!activeCategory && <SeoText />}
       </main>
       <Footer />
