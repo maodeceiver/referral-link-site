@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ScrollTop from '@/components/ScrollTop';
 import { categories, sites, type Site } from '@/data/sites';
 import { toast } from '@/hooks/use-toast';
 import { baseUrl, openRef } from '@/lib/refLink';
@@ -89,6 +90,7 @@ const SitePage = () => {
           </Link>
         </div>
         <Footer />
+      <ScrollTop />
       </div>
     );
   }

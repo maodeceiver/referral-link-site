@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import {
@@ -73,25 +73,6 @@ const Catalog = () => {
 
   const shown = filtered.slice(0, visible);
   const rest = filtered.length - shown.length;
-
-  const sentinel = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (rest <= 0) return;
-    const node = sentinel.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setVisible((v) => v + PAGE_SIZE);
-        }
-      },
-      { rootMargin: '300px 0px' },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [rest]);
 
   const changeCategory = (id: CategoryId | 'all') => {
     setActive(id);
@@ -185,13 +166,13 @@ const Catalog = () => {
       )}
 
       {rest > 0 && (
-        <div ref={sentinel} className="mt-6 flex flex-col items-center gap-3">
+        <div className="mt-6 flex flex-col items-center gap-3">
           <button
             type="button"
             onClick={() => setVisible((v) => v + PAGE_SIZE)}
             className="ghost-gradient flex h-12 items-center gap-2 rounded-xl border border-border px-7 text-[0.8rem] font-bold uppercase tracking-[0.08em] text-foreground transition-colors hover:border-primary/50"
           >
-            <Icon name="Loader" size={16} className="animate-spin text-primary" />
+            <Icon name="ChevronDown" size={16} className="text-primary" />
             Показать ещё {Math.min(rest, PAGE_SIZE)}
           </button>
           <p className="text-[0.78rem] text-muted-foreground">

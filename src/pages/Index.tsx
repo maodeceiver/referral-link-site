@@ -5,6 +5,7 @@ import Catalog from '@/components/Catalog';
 import HowItWorks from '@/components/HowItWorks';
 import Faq from '@/components/Faq';
 import Footer from '@/components/Footer';
+import ScrollTop from '@/components/ScrollTop';
 import SeoSchema from '@/components/SeoSchema';
 import SeoText from '@/components/SeoText';
 import CategoryIntro from '@/components/CategoryIntro';
@@ -53,6 +54,7 @@ const Index = () => {
         {!activeCategory && <SeoText />}
       </main>
       <Footer />
+      <ScrollTop />
     </div>
   );
 };
