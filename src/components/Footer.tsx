@@ -12,7 +12,7 @@ const Footer = () => {
                 <Icon name="Box" size={22} className="text-primary-foreground" />
               </span>
               <span className="text-[1.15rem] font-bold tracking-[-0.02em]">
-                freeopencasecs2
+                CodeCase
               </span>
             </div>
             <p className="mt-4 max-w-sm text-muted-foreground">
@@ -50,11 +50,11 @@ const Footer = () => {
             <ul className="mt-4 space-y-3">
               <li>
                 <a
-                  href="mailto:hi@freeopencasecs2.ru"
+                  href="mailto:hi@codecase.ru"
                   className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
                 >
                   <Icon name="Mail" size={16} />
-                  hi@freeopencasecs2.ru
+                  hi@codecase.ru
                 </a>
               </li>
               <li>
@@ -77,7 +77,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 border-t border-border pt-6 text-[0.82rem] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 freeopencasecs2. Все права защищены.</p>
+          <p>© 2026 CodeCase. Все права защищены.</p>
           <p>
             Часть ссылок — реферальные. Это не влияет на цену и бонус для вас.
           </p>

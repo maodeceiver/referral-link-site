@@ -32,7 +32,7 @@ const Header = () => {
             </span>
             <span className="leading-none">
               <span className="block text-[1.15rem] font-bold tracking-[-0.02em]">
-                freeopencasecs2
+                CodeCase
               </span>
               <span className="mt-1 block text-[0.62rem] font-semibold uppercase tracking-[0.09em] text-muted-foreground">
                 Промокоды сайтов с кейсами CS2 · 2026
