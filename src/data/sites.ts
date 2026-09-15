@@ -5,7 +5,8 @@ export type CategoryId =
   | 'contracts'
   | 'roulette'
   | 'crash'
-  | 'battles';
+  | 'battles'
+  | 'trade';
 
 export interface Category {
   id: CategoryId;
@@ -21,6 +22,7 @@ export const categories: Category[] = [
   { id: 'roulette', label: 'Рулетка', icon: 'Disc3' },
   { id: 'crash', label: 'Краш', icon: 'Rocket' },
   { id: 'battles', label: 'Батлы', icon: 'Swords' },
+  { id: 'trade', label: 'Трейд', icon: 'ArrowLeftRight' },
 ];
 
 export type AccentTone = 'accent' | 'gold' | 'sky' | 'foreground';
@@ -68,6 +70,26 @@ export const sites: Site[] = [
     minDeposit: 'от 100 ₽',
     payouts: 'Steam, крипта, карта',
     featured: true,
+  },
+  {
+    id: 'ntskins',
+    name: 'NTSkins',
+    namePrefix: 'NT',
+    nameSuffix: 'Skins',
+    tone: 'sky',
+    tagline: 'SKIN TRADE',
+    kind: 'Бесплатный скин',
+    bonusHighlight: 'Скин',
+    bonusRest: 'бесплатно за регистрацию',
+    promo: '',
+    rating: 4.66,
+    reviews: 714,
+    categories: ['trade', 'free', 'upgrade'],
+    url: 'https://ntskins.com/freeskin',
+    checked: 'сегодня',
+    perks: ['Обмен скинов без комиссии', 'Бесплатный скин новичкам', 'Мгновенный трейд'],
+    minDeposit: 'не нужен',
+    payouts: 'Steam-трейд',
   },
   {
     id: 'dropzone',
