@@ -241,6 +241,27 @@ export const sites: Site[] = [
     minDeposit: 'не нужен',
     payouts: 'Steam-трейд',
   },
+  {
+    id: 'tradeit',
+    name: 'Tradeit.gg',
+    namePrefix: 'Trade',
+    nameSuffix: 'it.gg',
+    tone: 'sky',
+    logo: '/logos/tradeit.webp',
+    tagline: 'SKIN TRADE',
+    kind: 'Бонус за переход по ссылке',
+    bonusHighlight: 'Бонус',
+    bonusRest: 'на первый обмен',
+    promo: '',
+    rating: 4.75,
+    reviews: 1362,
+    categories: ['trade', 'upgrade'],
+    url: 'https://tradeit.gg/?aff=deceiver',
+    checked: 'сегодня',
+    perks: ['Крупнейший склад скинов CS2', 'Обмен и покупка за деньги', 'Мгновенные трейды 24/7'],
+    minDeposit: 'не нужен',
+    payouts: 'Steam-трейд, карта, крипта',
+  },
 ];
 
 export const faq = [
