@@ -45,9 +45,17 @@ const SiteCard = ({ site, index, copied, onCopy, onReview }: SiteCardProps) => {
 
       <div className="relative z-10 flex flex-1 flex-col justify-between gap-5">
         <div>
-          <p className="mb-2 text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
-            {site.kind}
-          </p>
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            {site.featured && (
+              <span className="flex h-[22px] items-center gap-1 rounded-full bg-primary px-2 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-primary-foreground">
+                <Icon name="Flame" size={11} />
+                Рекомендуем
+              </span>
+            )}
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+              {site.kind}
+            </p>
+          </div>
           <p className="text-[1.5rem] font-bold leading-[1.05] tracking-[-0.02em]">
             <span className="text-primary">{site.bonusHighlight}</span> {site.bonusRest}
           </p>

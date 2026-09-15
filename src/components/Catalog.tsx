@@ -42,6 +42,7 @@ const Catalog = () => {
     });
 
     return [...list].sort((a, b) => {
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
       if (sort === 'name') return a.name.localeCompare(b.name, 'ru');
       if (sort === 'fresh') {
         const w = (s: Site) => (s.checked === 'сегодня' ? 0 : 1);

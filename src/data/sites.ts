@@ -44,6 +44,7 @@ export interface Site {
   perks: string[];
   minDeposit: string;
   payouts: string;
+  featured?: boolean;
 }
 
 export const sites: Site[] = [
@@ -54,7 +55,7 @@ export const sites: Site[] = [
     nameSuffix: 'oz',
     tone: 'accent',
     tagline: 'CS2 CASES',
-    kind: 'Бонус по нашей ссылке',
+    kind: 'Бонус за переход по ссылке',
     bonusHighlight: '250 монет',
     bonusRest: 'каждые сутки',
     promo: '',
@@ -66,6 +67,7 @@ export const sites: Site[] = [
     perks: ['250 бесплатных монет каждые сутки', 'Вывод скинов за 2 минуты', 'Кейсы от 3 ₽'],
     minDeposit: 'от 100 ₽',
     payouts: 'Steam, крипта, карта',
+    featured: true,
   },
   {
     id: 'dropzone',
