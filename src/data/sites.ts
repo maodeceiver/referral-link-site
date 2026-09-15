@@ -220,6 +220,27 @@ export const sites: Site[] = [
     minDeposit: 'не нужен',
     payouts: 'Steam, крипта, карта',
   },
+  {
+    id: 'swapgg',
+    name: 'Swap.gg',
+    namePrefix: 'Swap',
+    nameSuffix: '.gg',
+    tone: 'sky',
+    logo: '/logos/swapgg.webp',
+    tagline: 'SKIN TRADE',
+    kind: 'Бонус за переход по ссылке',
+    bonusHighlight: 'Бонус',
+    bonusRest: 'новым пользователям',
+    promo: '',
+    rating: 4.69,
+    reviews: 845,
+    categories: ['trade', 'upgrade'],
+    url: 'https://swap.gg/?r=KICPMVIYXT&utm_source=ref&utm_medium=link',
+    checked: 'сегодня',
+    perks: ['Обмен скинов CS2 за минуту', 'Огромный склад предметов', 'Прозрачная комиссия'],
+    minDeposit: 'не нужен',
+    payouts: 'Steam-трейд',
+  },
 ];
 
 export const faq = [
