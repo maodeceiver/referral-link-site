@@ -63,8 +63,8 @@ export const sites: Site[] = [
     categories: ['cases', 'upgrade', 'battles'],
     url: 'https://app.skinoz.net/?ref=YHNzRVVkagdZXgRZcw==',
     checked: 'сегодня',
-    perks: ['Вывод скинов за 2 минуты', 'Кейсы от 3 ₽', 'Бонус-колесо каждый час'],
-    minDeposit: 'от 50 ₽',
+    perks: ['Вывод скинов за 2 минуты', 'Кейсы от 3 ₽'],
+    minDeposit: 'от 100 ₽',
     payouts: 'Steam, крипта, карта',
   },
   {
