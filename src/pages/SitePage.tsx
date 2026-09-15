@@ -193,7 +193,11 @@ const SitePage = () => {
                 href={site.url}
                 target="_blank"
                 rel="nofollow sponsored noopener noreferrer"
-                className="accent-gradient mt-5 inline-flex h-[52px] items-center rounded-xl px-8 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-primary-foreground shadow-[0_10px_24px_hsl(var(--primary)/0.28)] transition-transform hover:scale-[1.03]"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(site.url, '_blank', 'noopener,noreferrer');
+                }}
+                className="accent-gradient relative z-20 mt-5 inline-flex h-[52px] cursor-pointer items-center rounded-xl px-8 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-primary-foreground shadow-[0_10px_24px_hsl(var(--primary)/0.28)] transition-transform hover:scale-[1.03] active:scale-[0.99]"
               >
                 Забрать бонус на {site.name}
               </a>
