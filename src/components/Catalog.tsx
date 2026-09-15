@@ -156,9 +156,15 @@ const Catalog = () => {
                     <Icon name="Star" size={16} className="fill-gold text-gold" />
                     {review.rating.toFixed(2)}
                   </span>
-                  <span className="flex h-8 items-center rounded-[9px] border border-dashed border-primary/60 bg-primary/10 px-3 text-sm font-bold uppercase tracking-[0.12em]">
-                    {review.promo}
-                  </span>
+                  {review.promo ? (
+                    <span className="flex h-8 items-center rounded-[9px] border border-dashed border-primary/60 bg-primary/10 px-3 text-sm font-bold uppercase tracking-[0.12em]">
+                      {review.promo}
+                    </span>
+                  ) : (
+                    <span className="flex h-8 items-center rounded-[9px] border border-border bg-well px-3 text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                      без промокода
+                    </span>
+                  )}
                 </div>
 
                 <p className="text-[1.05rem]">
@@ -191,13 +197,15 @@ const Catalog = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 pt-1">
-                  <button
-                    type="button"
-                    onClick={() => handleCopy(review)}
-                    className="ghost-gradient flex h-12 items-center rounded-xl border border-border px-5 text-[0.8rem] font-bold uppercase tracking-[0.08em] text-foreground"
-                  >
-                    Копировать код
-                  </button>
+                  {review.promo && (
+                    <button
+                      type="button"
+                      onClick={() => handleCopy(review)}
+                      className="ghost-gradient flex h-12 items-center rounded-xl border border-border px-5 text-[0.8rem] font-bold uppercase tracking-[0.08em] text-foreground"
+                    >
+                      Копировать код
+                    </button>
+                  )}
                   <a
                     href={review.url}
                     target="_blank"

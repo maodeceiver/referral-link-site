@@ -57,7 +57,7 @@ export const sites: Site[] = [
     kind: 'Бонус по нашей ссылке',
     bonusHighlight: 'Бонус',
     bonusRest: 'за переход по ссылке',
-    promo: 'FREEOPEN',
+    promo: '',
     rating: 4.88,
     reviews: 1284,
     categories: ['cases', 'upgrade', 'battles'],

@@ -59,15 +59,22 @@ const SiteCard = ({ site, index, copied, onCopy, onReview }: SiteCardProps) => {
                 · {site.reviews} оценок
               </span>
             </span>
-            <button
-              type="button"
-              onClick={() => onCopy(site)}
-              aria-label={`Скопировать промокод ${site.promo}`}
-              className="flex h-8 items-center gap-2 rounded-[9px] border border-dashed border-primary/60 bg-primary/10 px-3 text-[0.8rem] font-bold uppercase tracking-[0.12em] transition-colors hover:bg-primary/20"
-            >
-              <Icon name={copied ? 'Check' : 'Copy'} size={13} className="text-primary" />
-              {copied ? 'Скопировано' : site.promo}
-            </button>
+            {site.promo ? (
+              <button
+                type="button"
+                onClick={() => onCopy(site)}
+                aria-label={`Скопировать промокод ${site.promo}`}
+                className="flex h-8 items-center gap-2 rounded-[9px] border border-dashed border-primary/60 bg-primary/10 px-3 text-[0.8rem] font-bold uppercase tracking-[0.12em] transition-colors hover:bg-primary/20"
+              >
+                <Icon name={copied ? 'Check' : 'Copy'} size={13} className="text-primary" />
+                {copied ? 'Скопировано' : site.promo}
+              </button>
+            ) : (
+              <span className="flex h-8 items-center gap-2 rounded-[9px] border border-border bg-well px-3 text-[0.8rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                <Icon name="Link" size={13} className="text-primary" />
+                без промокода
+              </span>
+            )}
           </div>
         </div>
 
