@@ -12,6 +12,7 @@ import SearchBand from '@/components/SearchBand';
 import SiteCard from '@/components/SiteCard';
 import { categories, sites, type CategoryId, type Site } from '@/data/sites';
 import { toast } from '@/hooks/use-toast';
+import { baseUrl, openRef } from '@/lib/refLink';
 
 type SortKey = 'rating' | 'name' | 'fresh';
 
@@ -230,7 +231,8 @@ const Catalog = () => {
                     Подробный обзор
                   </Link>
                   <a
-                    href={review.url}
+                    href={baseUrl(review.url)}
+                    onClick={(e) => openRef(review.url, e)}
                     target="_blank"
                     rel="nofollow sponsored noopener noreferrer"
                     className="accent-gradient flex h-12 flex-1 items-center justify-center rounded-xl px-6 text-[0.8rem] font-bold uppercase tracking-[0.08em] text-primary-foreground"

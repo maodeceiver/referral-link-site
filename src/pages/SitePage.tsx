@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { categories, sites, type Site } from '@/data/sites';
 import { toast } from '@/hooks/use-toast';
+import { baseUrl, openRef } from '@/lib/refLink';
 
 const SITE_URL = 'https://codecasecs.ru';
 
@@ -190,13 +191,10 @@ const SitePage = () => {
               </div>
 
               <a
-                href={site.url}
+                href={baseUrl(site.url)}
                 target="_blank"
                 rel="nofollow sponsored noopener noreferrer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(site.url, '_blank', 'noopener,noreferrer');
-                }}
+                onClick={(e) => openRef(site.url, e)}
                 className="accent-gradient relative z-20 mt-5 inline-flex h-[52px] cursor-pointer items-center rounded-xl px-8 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-primary-foreground shadow-[0_10px_24px_hsl(var(--primary)/0.28)] transition-transform hover:scale-[1.03] active:scale-[0.99]"
               >
                 Забрать бонус на {site.name}

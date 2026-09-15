@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import type { Site } from '@/data/sites';
+import { baseUrl, openRef } from '@/lib/refLink';
 
 const toneClass: Record<Site['tone'], string> = {
   accent: 'text-primary',
@@ -97,7 +98,8 @@ const SiteCard = ({ site, index, copied, onCopy, onReview }: SiteCardProps) => {
 
         <div className="flex flex-wrap items-center gap-[10px]">
           <a
-            href={site.url}
+            href={baseUrl(site.url)}
+            onClick={(e) => openRef(site.url, e)}
             target="_blank"
             rel="nofollow sponsored noopener noreferrer"
             className="accent-gradient flex h-[46px] items-center rounded-xl px-6 text-[0.82rem] font-bold uppercase tracking-[0.08em] text-primary-foreground shadow-[0_10px_24px_hsl(var(--primary)/0.28)] transition-transform hover:scale-[1.03]"
