@@ -2,91 +2,128 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "TTNormsPro";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/4cc754c2-e564-4fca-b704-586cd3e5152f/fonts/999324fed70c268b.woff2)
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TTNormsPro";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/4cc754c2-e564-4fca-b704-586cd3e5152f/fonts/986fdf71c61a1a75.woff2)
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TTNormsPro";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/4cc754c2-e564-4fca-b704-586cd3e5152f/fonts/71eeeab0a091b994.woff2)
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TTNormsPro";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/4cc754c2-e564-4fca-b704-586cd3e5152f/fonts/66eb984c47cb4f54.woff2)
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* hero palette → shadcn tokens */
+    --background: 100 11% 5%;
+    --foreground: 96 24% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 105 10% 8%;
+    --card-foreground: 96 24% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 105 10% 8%;
+    --popover-foreground: 96 24% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 83 84% 46%;
+    --primary-foreground: 69 100% 4%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 103 13% 11%;
+    --secondary-foreground: 96 24% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 120 9% 7%;
+    --muted-foreground: 102 6% 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 83 84% 46%;
+    --accent-foreground: 69 100% 4%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 96 24% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 98 11% 14%;
+    --input: 100 16% 4%;
+    --ring: 83 84% 46%;
 
-    --radius: 0.5rem;
+    --radius: 1.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* extra hero tokens */
+    --accent-deep: 84 89% 31%;
+    --panel: 120 9% 7%;
+    --well: 100 16% 4%;
+    --ghost: 103 13% 11%;
+    --gold: 48 79% 57%;
+    --sky: 185 65% 54%;
+    --streak: 140 214 19;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 105 10% 8%;
+    --sidebar-foreground: 96 24% 96%;
+    --sidebar-primary: 83 84% 46%;
+    --sidebar-primary-foreground: 69 100% 4%;
+    --sidebar-accent: 103 13% 11%;
+    --sidebar-accent-foreground: 96 24% 96%;
+    --sidebar-border: 98 11% 14%;
+    --sidebar-ring: 83 84% 46%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 100 11% 5%;
+    --foreground: 96 24% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 105 10% 8%;
+    --card-foreground: 96 24% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 105 10% 8%;
+    --popover-foreground: 96 24% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 83 84% 46%;
+    --primary-foreground: 69 100% 4%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 103 13% 11%;
+    --secondary-foreground: 96 24% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 120 9% 7%;
+    --muted-foreground: 102 6% 55%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 83 84% 46%;
+    --accent-foreground: 69 100% 4%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 96 24% 96%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 98 11% 14%;
+    --input: 100 16% 4%;
+    --ring: 83 84% 46%;
+
+    --sidebar-background: 105 10% 8%;
+    --sidebar-foreground: 96 24% 96%;
+    --sidebar-primary: 83 84% 46%;
+    --sidebar-primary-foreground: 69 100% 4%;
+    --sidebar-accent: 103 13% 11%;
+    --sidebar-accent-foreground: 96 24% 96%;
+    --sidebar-border: 98 11% 14%;
+    --sidebar-ring: 83 84% 46%;
   }
 }
 
@@ -95,7 +132,65 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-family: "TTNormsPro", "Rubik", sans-serif;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .panel-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--card)) 0%,
+      hsl(var(--panel)) 100%
+    );
+  }
+
+  .accent-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent-deep)) 100%
+    );
+  }
+
+  .ghost-gradient {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--ghost)) 0%,
+      hsl(var(--panel)) 100%
+    );
+  }
+
+  .streak-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      115deg,
+      rgba(var(--streak), 0.18) 0 3px,
+      transparent 3px 26px
+    );
+    mask-image: linear-gradient(90deg, transparent 45%, #000 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 45%, #000 100%);
+  }
+
+  .logo-hatch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -25deg,
+      rgba(255, 255, 255, 0.035) 0 2px,
+      transparent 2px 18px
+    );
   }
 }
