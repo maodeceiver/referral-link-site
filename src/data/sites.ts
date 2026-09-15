@@ -262,6 +262,27 @@ export const sites: Site[] = [
     minDeposit: 'не нужен',
     payouts: 'Steam-трейд, карта, крипта',
   },
+  {
+    id: 'csmoney',
+    name: 'CS.MONEY',
+    namePrefix: 'CS.',
+    nameSuffix: 'MONEY',
+    tone: 'gold',
+    logo: '/logos/csmoney.webp',
+    tagline: 'SKIN TRADE',
+    kind: 'Обмен скинов',
+    bonusHighlight: 'Бонус',
+    bonusRest: 'за первый обмен',
+    promo: '',
+    rating: 4.82,
+    reviews: 2145,
+    categories: ['trade', 'upgrade'],
+    url: 'https://cs.money/ru/csgo/trade/',
+    checked: 'сегодня',
+    perks: ['Самый большой выбор скинов CS2', 'Обмен на любые предметы', 'Проверенная площадка с 2016 года'],
+    minDeposit: 'не нужен',
+    payouts: 'Steam-трейд, карта, крипта',
+  },
 ];
 
 export const faq = [
