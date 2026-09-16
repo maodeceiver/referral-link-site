@@ -57,9 +57,15 @@ const Header = () => {
               <span className="h-[7px] w-[7px] rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]" />
               Коды проверены сегодня
             </span>
-            <span className="flex h-[38px] items-center rounded-xl border border-border bg-card px-4 text-[0.78rem] font-semibold uppercase tracking-[0.06em] text-foreground">
-              Ru
-            </span>
+            <a
+              href="https://t.me/bonuspromocs2"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="accent-gradient flex h-[38px] items-center gap-2 rounded-xl px-4 text-[0.78rem] font-bold uppercase tracking-[0.06em] text-primary-foreground transition-transform hover:scale-[1.03]"
+            >
+              <Icon name="Send" size={15} />
+              Telegram
+            </a>
           </div>
 
           <button
@@ -85,6 +91,16 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="https://t.me/bonuspromocs2"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="accent-gradient mt-1 flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-[0.06em] text-primary-foreground"
+              >
+                <Icon name="Send" size={16} />
+                Telegram-канал
+              </a>
             </div>
           </nav>
         )}
