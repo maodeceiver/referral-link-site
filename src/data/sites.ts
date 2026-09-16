@@ -245,7 +245,7 @@ export const sites: Site[] = [
     bonusHighlight: 'Бонус на баланс',
     bonusRest: 'при активации промокода',
     promo: 'CodeCase',
-    rating: 4.67,
+    rating: 4.91,
     reviews: 734,
     categories: ['cases', 'upgrade', 'contracts', 'battles'],
     url: 'https://csgoose.com/',
@@ -257,6 +257,7 @@ export const sites: Site[] = [
     ],
     minDeposit: 'от 100 ₽',
     payouts: 'Steam, карта, крипта',
+    featured: true,
   },
   {
     id: '12cs',
