@@ -9,7 +9,6 @@ import ScrollTop from '@/components/ScrollTop';
 import SeoSchema from '@/components/SeoSchema';
 import SeoText from '@/components/SeoText';
 import CategoryIntro from '@/components/CategoryIntro';
-import SideBanner from '@/components/SideBanner';
 import { categoryContent } from '@/data/categoryContent';
 import { categories, sites, type CategoryId } from '@/data/sites';
 
@@ -47,8 +46,6 @@ const Index = () => {
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       <SeoSchema categoryId={activeCategory} />
       <Header />
-      <SideBanner side="left" />
-      <SideBanner side="right" />
       <main className="pt-2">
         <Catalog />
         {activeCategory && <CategoryIntro categoryId={activeCategory} />}
