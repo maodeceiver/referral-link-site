@@ -243,7 +243,7 @@ export const sites: Site[] = [
     tagline: 'CS2 CASES',
     kind: 'Бонус по промокоду',
     bonusHighlight: '4 бесплатных кейса',
-    bonusRest: 'по промокоду CodeCase',
+    bonusRest: 'по промокоду',
     promo: 'CodeCase',
     rating: 4.91,
     reviews: 734,
@@ -251,7 +251,7 @@ export const sites: Site[] = [
     url: 'https://csgoose.com/',
     checked: 'сегодня',
     perks: [
-      '4 бесплатных кейса по промокоду CodeCase',
+      '4 бесплатных кейса по промокоду',
       'Кейсы, апгрейдер, контракты и батлы',
       'Вывод скинов в инвентарь Steam',
     ],
