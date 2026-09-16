@@ -66,7 +66,7 @@ const Footer = () => {
                   className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
                 >
                   <Icon name="Send" size={16} />
-                  Telegram-канал с кодами
+                  Telegram-канал с кодами и розыгрышами
                 </a>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
