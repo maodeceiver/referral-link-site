@@ -18,16 +18,16 @@ const SideBanner = ({ side }: Props) => {
         href={AD_URL}
         target="_blank"
         rel="nofollow sponsored noopener"
-        className="pointer-events-auto block overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/50"
+        className="pointer-events-auto block overflow-hidden rounded-2xl border border-border bg-white transition-colors hover:border-primary/50"
       >
         <img
           src={AD_IMAGE}
-          alt="Бонус на кейсы CS2"
+          alt="Скачать приложение"
           loading="lazy"
-          className="h-[400px] w-full object-contain"
+          className="h-[400px] w-full object-cover"
         />
-        <div className="px-3 py-2 text-center text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-primary">
-          Забрать бонус
+        <div className="bg-[#fc3f1d] px-3 py-2 text-center text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-white">
+          Скачать
         </div>
       </a>
       <p className="mt-1 text-center text-[0.62rem] uppercase tracking-[0.1em] text-muted-foreground">
