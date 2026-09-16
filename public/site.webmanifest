@@ -1,0 +1,12 @@
+{
+  "name": "CodeCase — промокоды сайтов с кейсами CS2",
+  "short_name": "CodeCase",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "theme_color": "#8CD813",
+  "background_color": "#0d1117",
+  "display": "standalone",
+  "start_url": "/"
+}
