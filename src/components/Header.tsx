@@ -58,7 +58,7 @@ const Header = () => {
               Коды проверены сегодня
             </span>
             <a
-              href="https://t.me/bonuspromocs2"
+              href="https://t.me/codecasecs"
               target="_blank"
               rel="noopener noreferrer"
               className="accent-gradient flex h-[38px] items-center gap-2 rounded-xl px-4 text-[0.78rem] font-bold uppercase tracking-[0.06em] text-primary-foreground transition-transform hover:scale-[1.03]"
@@ -92,7 +92,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="https://t.me/bonuspromocs2"
+                href="https://t.me/codecasecs"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
