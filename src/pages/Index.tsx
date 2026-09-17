@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Catalog from '@/components/Catalog';
 import HowItWorks from '@/components/HowItWorks';
+import CaseSimulator from '@/components/CaseSimulator';
 import Faq from '@/components/Faq';
 import Footer from '@/components/Footer';
 import ScrollTop from '@/components/ScrollTop';
@@ -49,6 +50,7 @@ const Index = () => {
       <main className="pt-2">
         <Catalog />
         {activeCategory && <CategoryIntro categoryId={activeCategory} />}
+        {!activeCategory && <CaseSimulator />}
         <HowItWorks />
         <Faq categoryId={activeCategory} />
         {!activeCategory && <SeoText />}
