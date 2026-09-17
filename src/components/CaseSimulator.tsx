@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import PrizeTile from '@/components/case/PrizeTile';
 import { prizes, prizeChance, rollPrize, toneColor, type Prize } from '@/data/casePrizes';
 import { openRef } from '@/lib/refLink';
+import { useCaseSound } from '@/hooks/useCaseSound';
 
 const STRIP_LENGTH = 56;
 const WINNER_INDEX = 48;
@@ -27,17 +28,24 @@ const CaseSimulator = () => {
   const winnerRef = useRef<Prize | null>(null);
   const timerRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
+  const tickRafRef = useRef<number | null>(null);
+  const lastTileRef = useRef(-1);
+
+  const { enabled: soundOn, toggle: toggleSound, playTick, playWin, primeAudio } =
+    useCaseSound();
 
   useEffect(
     () => () => {
       if (timerRef.current) window.clearTimeout(timerRef.current);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (tickRafRef.current) cancelAnimationFrame(tickRafRef.current);
     },
     [],
   );
 
   const spin = useCallback(() => {
     if (spinning) return;
+    primeAudio();
     const winner = rollPrize();
     winnerRef.current = winner;
 
@@ -46,7 +54,7 @@ const CaseSimulator = () => {
     setAnimated(false);
     setOffset(0);
     setStrip(buildStrip(winner));
-  }, [spinning]);
+  }, [spinning, primeAudio]);
 
   useEffect(() => {
     if (!spinning || animated) return;
@@ -62,7 +70,25 @@ const CaseSimulator = () => {
         setAnimated(true);
         setOffset(el.offsetLeft + el.offsetWidth / 2 - viewport.clientWidth / 2 + jitter);
 
+        lastTileRef.current = -1;
+        const tileStep = el.offsetWidth + 12;
+        const center = viewport.getBoundingClientRect().width / 2;
+
+        const watchTicks = () => {
+          const t = trackRef.current;
+          if (!t) return;
+          const shift = -new DOMMatrixReadOnly(getComputedStyle(t).transform).m41;
+          const index = Math.floor((shift + center) / tileStep);
+          if (index !== lastTileRef.current) {
+            if (lastTileRef.current !== -1) playTick();
+            lastTileRef.current = index;
+          }
+          tickRafRef.current = requestAnimationFrame(watchTicks);
+        };
+        tickRafRef.current = requestAnimationFrame(watchTicks);
+
         timerRef.current = window.setTimeout(() => {
+          if (tickRafRef.current) cancelAnimationFrame(tickRafRef.current);
           const won = winnerRef.current;
           setSpinning(false);
           setAnimated(false);
@@ -70,6 +96,7 @@ const CaseSimulator = () => {
           setResult(won);
           setOpened((n) => n + 1);
           setHistory((h) => [won, ...h].slice(0, 12));
+          playWin();
         }, 6100);
       });
     });
@@ -77,7 +104,7 @@ const CaseSimulator = () => {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [spinning, animated, strip]);
+  }, [spinning, animated, strip, playTick, playWin]);
 
   const resultColor = result ? toneColor[result.site.tone] : null;
 
@@ -92,10 +119,22 @@ const CaseSimulator = () => {
             Кейс с бонусами
           </h2>
         </div>
-        <p className="max-w-md text-muted-foreground">
-          Не знаете, с какого сайта начать? Крутите барабан — выпадет случайный сервис
-          из нашего каталога вместе с его бонусом и промокодом.
-        </p>
+        <div className="flex max-w-md flex-col items-start gap-3">
+          <p className="text-muted-foreground">
+            Не знаете, с какого сайта начать? Крутите барабан — выпадет случайный сервис
+            из нашего каталога вместе с его бонусом и промокодом.
+          </p>
+          <button
+            type="button"
+            onClick={toggleSound}
+            aria-pressed={soundOn}
+            aria-label={soundOn ? 'Выключить звук' : 'Включить звук'}
+            className="flex items-center gap-2 rounded-xl border border-border px-3 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+          >
+            <Icon name={soundOn ? 'Volume2' : 'VolumeX'} size={16} />
+            {soundOn ? 'Звук включён' : 'Звук выключен'}
+          </button>
+        </div>
       </div>
 
       <div className="overflow-hidden rounded-3xl border border-border panel-gradient">
