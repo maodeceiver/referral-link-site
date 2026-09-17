@@ -1,40 +1,35 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
-import SkinTile from '@/components/case/SkinTile';
-import { caseSkins, rarityStyles, rollSkin, type Skin } from '@/data/skins';
+import PrizeTile from '@/components/case/PrizeTile';
+import { prizes, prizeChance, rollPrize, toneColor, type Prize } from '@/data/casePrizes';
+import { openRef } from '@/lib/refLink';
 
 const STRIP_LENGTH = 56;
 const WINNER_INDEX = 48;
 
-const buildStrip = (winner: Skin): Skin[] =>
+const buildStrip = (winner: Prize): Prize[] =>
   Array.from({ length: STRIP_LENGTH }, (_, i) =>
-    i === WINNER_INDEX ? winner : caseSkins[Math.floor(Math.random() * caseSkins.length)],
+    i === WINNER_INDEX ? winner : prizes[Math.floor(Math.random() * prizes.length)],
   );
 
 const CaseSimulator = () => {
-  const [strip, setStrip] = useState<Skin[]>(() => buildStrip(caseSkins[0]));
+  const [strip, setStrip] = useState<Prize[]>(() => buildStrip(prizes[0]));
   const [offset, setOffset] = useState(0);
   const [spinning, setSpinning] = useState(false);
-  const [result, setResult] = useState<Skin | null>(null);
-  const [history, setHistory] = useState<Skin[]>([]);
+  const [result, setResult] = useState<Prize | null>(null);
+  const [history, setHistory] = useState<Prize[]>([]);
   const [opened, setOpened] = useState(0);
 
   const trackRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
 
-  const best = useMemo(
-    () => history.reduce<Skin | null>((acc, s) => (!acc || s.price > acc.price ? s : acc), null),
-    [history],
-  );
-
   const spin = useCallback(() => {
     if (spinning) return;
-    const winner = rollSkin();
-    const nextStrip = buildStrip(winner);
+    const winner = rollPrize();
 
     setResult(null);
-    setStrip(nextStrip);
+    setStrip(buildStrip(winner));
     setOffset(0);
     setSpinning(true);
 
@@ -58,25 +53,22 @@ const CaseSimulator = () => {
     }, 6100);
   }, [spinning]);
 
-  const resultStyle = result ? rarityStyles[result.rarity] : null;
+  const resultColor = result ? toneColor[result.site.tone] : null;
 
   return (
-    <section
-      id="simulator"
-      className="mx-auto w-full max-w-[1280px] px-4 py-14 sm:px-5"
-    >
+    <section id="simulator" className="mx-auto w-full max-w-[1280px] px-4 py-14 sm:px-5">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-primary">
             Демо-режим
           </p>
           <h2 className="mt-2 text-[1.9rem] font-bold uppercase leading-[1.08] tracking-[-0.025em] sm:text-[2.2rem]">
-            Симулятор открытия кейса
+            Кейс с бонусами
           </h2>
         </div>
         <p className="max-w-md text-muted-foreground">
-          Бесплатная тренировка без депозита и регистрации. Шансы приближены к реальным —
-          посмотрите, как часто на самом деле выпадает нож.
+          Не знаете, с какого сайта начать? Крутите барабан — выпадет случайный сервис
+          из нашего каталога вместе с его бонусом и промокодом.
         </p>
       </div>
 
@@ -84,7 +76,7 @@ const CaseSimulator = () => {
         <div className="relative">
           <div
             ref={viewportRef}
-            className="relative overflow-hidden px-0 py-6"
+            className="relative overflow-hidden py-6"
             style={{
               maskImage:
                 'linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%)',
@@ -97,16 +89,14 @@ const CaseSimulator = () => {
               className="flex gap-3 will-change-transform"
               style={{
                 transform: `translate3d(-${offset}px, 0, 0)`,
-                transition: spinning
-                  ? 'transform 6s cubic-bezier(0.12, 0.72, 0.1, 1)'
-                  : 'none',
+                transition: spinning ? 'transform 6s cubic-bezier(0.12, 0.72, 0.1, 1)' : 'none',
               }}
             >
-              {strip.map((skin, i) => (
-                <SkinTile
-                  key={`${skin.id}-${i}`}
-                  skin={skin}
-                  highlight={!spinning && result?.id === skin.id && i === WINNER_INDEX}
+              {strip.map((prize, i) => (
+                <PrizeTile
+                  key={`${prize.site.id}-${i}`}
+                  prize={prize}
+                  highlight={!spinning && i === WINNER_INDEX && result?.site.id === prize.site.id}
                 />
               ))}
             </div>
@@ -119,63 +109,82 @@ const CaseSimulator = () => {
 
         <div className="flex flex-col gap-4 border-t border-border px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-h-[52px]">
-            {result && resultStyle ? (
+            {result && resultColor ? (
               <div className="flex items-center gap-3">
-                <span
-                  className="grid h-11 w-11 shrink-0 place-items-center rounded-xl"
-                  style={{ background: resultStyle.glow }}
-                >
-                  <Icon name="Sparkles" size={20} style={{ color: resultStyle.color }} />
-                </span>
+                <img
+                  src={result.site.logo}
+                  alt={result.site.name}
+                  className="h-11 w-11 shrink-0 rounded-xl object-contain p-1"
+                  style={{ background: `${resultColor}1f` }}
+                />
                 <div>
                   <p
                     className="text-[0.66rem] font-semibold uppercase tracking-[0.1em]"
-                    style={{ color: resultStyle.color }}
+                    style={{ color: resultColor }}
                   >
-                    {resultStyle.label} · шанс {resultStyle.chance}%
+                    {result.site.name} · шанс {prizeChance(result)}%
                   </p>
                   <p className="text-base font-bold tracking-[-0.02em]">
-                    {result.weapon} | {result.skin} —{' '}
-                    {result.price.toLocaleString('ru-RU')} ₽
+                    {result.site.bonusHighlight}{' '}
+                    <span className="font-medium text-muted-foreground">
+                      {result.site.bonusRest}
+                    </span>
                   </p>
                 </div>
               </div>
             ) : (
               <p className="text-muted-foreground">
-                {spinning ? 'Кейс открывается…' : 'Нажмите «Открыть кейс» и испытайте удачу.'}
+                {spinning ? 'Выбираем сервис…' : 'Нажмите «Открыть кейс» и получите случайный бонус.'}
               </p>
             )}
           </div>
 
-          <Button
-            size="lg"
-            onClick={spin}
-            disabled={spinning}
-            className="accent-gradient h-12 shrink-0 rounded-xl px-7 text-base font-bold uppercase tracking-[0.02em] text-primary-foreground hover:opacity-90"
-          >
-            <Icon name={spinning ? 'Loader2' : 'Package'} size={18} className={spinning ? 'animate-spin' : ''} />
-            {spinning ? 'Открываем' : 'Открыть кейс'}
-          </Button>
+          <div className="flex shrink-0 flex-wrap gap-3">
+            {result && (
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => openRef(result.site.url)}
+                className="h-12 rounded-xl border-primary/40 px-6 text-base font-bold uppercase tracking-[0.02em] text-primary hover:bg-primary/10"
+              >
+                <Icon name="Gift" size={18} />
+                Забрать бонус
+              </Button>
+            )}
+            <Button
+              size="lg"
+              onClick={spin}
+              disabled={spinning}
+              className="accent-gradient h-12 rounded-xl px-7 text-base font-bold uppercase tracking-[0.02em] text-primary-foreground hover:opacity-90"
+            >
+              <Icon
+                name={spinning ? 'Loader2' : 'Package'}
+                size={18}
+                className={spinning ? 'animate-spin' : ''}
+              />
+              {spinning ? 'Крутим' : result ? 'Крутить ещё' : 'Открыть кейс'}
+            </Button>
+          </div>
         </div>
       </div>
 
       <div className="mt-4 grid gap-4 md:grid-cols-[1fr_auto]">
         <div className="rounded-3xl border border-border panel-gradient p-5">
           <p className="text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
-            Последние дропы
+            Что уже выпадало
           </p>
           {history.length ? (
             <div className="mt-3 flex flex-wrap gap-2">
-              {history.map((s, i) => (
+              {history.map((p, i) => (
                 <span
-                  key={`${s.id}-${i}`}
+                  key={`${p.site.id}-${i}`}
                   className="rounded-lg border px-2.5 py-1 text-[0.72rem] font-semibold"
                   style={{
-                    borderColor: rarityStyles[s.rarity].color,
-                    color: rarityStyles[s.rarity].color,
+                    borderColor: toneColor[p.site.tone],
+                    color: toneColor[p.site.tone],
                   }}
                 >
-                  {s.skin}
+                  {p.site.name}
                 </span>
               ))}
             </div>
@@ -187,25 +196,22 @@ const CaseSimulator = () => {
         <div className="grid grid-cols-2 gap-4 md:w-[320px]">
           <div className="rounded-3xl border border-border panel-gradient p-5">
             <p className="text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
-              Открыто
+              Прокруток
             </p>
             <p className="mt-2 text-2xl font-bold">{opened}</p>
           </div>
           <div className="rounded-3xl border border-border panel-gradient p-5">
             <p className="text-[0.66rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
-              Лучший дроп
+              Сервисов в кейсе
             </p>
-            <p className="mt-2 text-2xl font-bold text-primary">
-              {best ? `${best.price.toLocaleString('ru-RU')} ₽` : '—'}
-            </p>
+            <p className="mt-2 text-2xl font-bold text-primary">{prizes.length}</p>
           </div>
         </div>
       </div>
 
       <p className="mt-4 text-[0.78rem] leading-relaxed text-muted-foreground">
-        Симулятор носит развлекательный характер: предметы виртуальные, вывод и покупка
-        недоступны. Реальные кейсы открываются только на сайтах из каталога — там же
-        действуют промокоды на бонус.
+        Барабан выбирает сервис из каталога случайным образом и показывает его актуальный
+        бонус. Промокоды проверяются ежедневно, переход на сайт — по прямой ссылке.
       </p>
     </section>
   );
