@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 import PrizeTile from '@/components/case/PrizeTile';
@@ -16,6 +16,7 @@ const buildStrip = (winner: Prize): Prize[] =>
 const CaseSimulator = () => {
   const [strip, setStrip] = useState<Prize[]>(() => buildStrip(prizes[0]));
   const [offset, setOffset] = useState(0);
+  const [animated, setAnimated] = useState(false);
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<Prize | null>(null);
   const [history, setHistory] = useState<Prize[]>([]);
@@ -23,35 +24,60 @@ const CaseSimulator = () => {
 
   const trackRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
+  const winnerRef = useRef<Prize | null>(null);
+  const timerRef = useRef<number | null>(null);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (timerRef.current) window.clearTimeout(timerRef.current);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    },
+    [],
+  );
 
   const spin = useCallback(() => {
     if (spinning) return;
     const winner = rollPrize();
+    winnerRef.current = winner;
 
     setResult(null);
-    setStrip(buildStrip(winner));
-    setOffset(0);
     setSpinning(true);
+    setAnimated(false);
+    setOffset(0);
+    setStrip(buildStrip(winner));
+  }, [spinning]);
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
+  useEffect(() => {
+    if (!spinning || animated) return;
+
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = requestAnimationFrame(() => {
         const track = trackRef.current;
         const viewport = viewportRef.current;
-        if (!track || !viewport) return;
-        const el = track.children[WINNER_INDEX] as HTMLElement | undefined;
-        if (!el) return;
+        const el = track?.children[WINNER_INDEX] as HTMLElement | undefined;
+        if (!track || !viewport || !el) return;
+
         const jitter = (Math.random() - 0.5) * el.offsetWidth * 0.55;
+        setAnimated(true);
         setOffset(el.offsetLeft + el.offsetWidth / 2 - viewport.clientWidth / 2 + jitter);
+
+        timerRef.current = window.setTimeout(() => {
+          const won = winnerRef.current;
+          setSpinning(false);
+          setAnimated(false);
+          if (!won) return;
+          setResult(won);
+          setOpened((n) => n + 1);
+          setHistory((h) => [won, ...h].slice(0, 12));
+        }, 6100);
       });
     });
 
-    window.setTimeout(() => {
-      setSpinning(false);
-      setResult(winner);
-      setOpened((n) => n + 1);
-      setHistory((h) => [winner, ...h].slice(0, 12));
-    }, 6100);
-  }, [spinning]);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [spinning, animated, strip]);
 
   const resultColor = result ? toneColor[result.site.tone] : null;
 
@@ -89,7 +115,7 @@ const CaseSimulator = () => {
               className="flex gap-3 will-change-transform"
               style={{
                 transform: `translate3d(-${offset}px, 0, 0)`,
-                transition: spinning ? 'transform 6s cubic-bezier(0.12, 0.72, 0.1, 1)' : 'none',
+                transition: animated ? 'transform 6s cubic-bezier(0.12, 0.72, 0.1, 1)' : 'none',
               }}
             >
               {strip.map((prize, i) => (
