@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import { categories } from '@/data/sites';
+import { articles } from '@/data/articles';
 
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-panel">
       <div className="mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-5">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.2fr)]">
           <div>
             <div className="flex items-center gap-3">
               <span className="accent-gradient grid h-10 w-10 place-items-center rounded-xl">
@@ -72,6 +73,32 @@ const Footer = () => {
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Icon name="Clock" size={16} />
                 Ответ в течение суток
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+              Полезное
+            </p>
+            <ul className="mt-4 space-y-2">
+              {articles.map((article) => (
+                <li key={article.slug}>
+                  <Link
+                    to={`/blog/${article.slug}`}
+                    className="text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {article.h1}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  to="/blog"
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Все материалы раздела
+                </Link>
               </li>
             </ul>
           </div>
