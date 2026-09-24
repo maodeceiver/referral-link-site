@@ -146,12 +146,16 @@ const ArticlePage = () => {
                   }
                   if (block.type === 'code') {
                     return (
-                      <pre
-                        key={bi}
-                        className="mt-4 overflow-x-auto rounded-2xl border border-border bg-well p-4 text-[0.8rem] leading-relaxed text-foreground"
-                      >
-                        <code>{block.code}</code>
-                      </pre>
+                      <figure key={bi} className="mt-4">
+                        <pre className="overflow-x-auto rounded-2xl border border-border bg-well p-4 text-[0.8rem] leading-relaxed text-foreground">
+                          <code>{block.code}</code>
+                        </pre>
+                        {block.caption && (
+                          <figcaption className="mt-2 text-[0.82rem] text-muted-foreground">
+                            {block.caption}
+                          </figcaption>
+                        )}
+                      </figure>
                     );
                   }
                   if (block.type === 'checks') {
